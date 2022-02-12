@@ -24,32 +24,32 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
-        public IActionResult AddUser(User user)
+        [HttpPost(Name = nameof(AddNewUser))]
+        public IActionResult AddNewUser(User user)
         {
             user.Id = Guid.NewGuid();
             _users.Add(user);
-
+            _logger.LogInformation($"Create user with id '{user.Id}'");
             return Created(user.Id.ToString(), user);
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetAllUsers))]
         public IActionResult GetAllUsers()
         {
             return Ok(_users);
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetUserById))]
         public IActionResult GetUserById(Guid guid)
         {
             var user = _users.FirstOrDefault(u => u.Id.Equals(guid));
             return user != null ? Ok(user) : NotFound();
         }
 
-        [HttpPut]
-        public IActionResult UpdateUser(User user)
+        [HttpPut(Name = nameof(UpdateUserById))]
+        public IActionResult UpdateUserById(Guid id, User user)
         {
-            var dbUser = _users.FirstOrDefault(u => u.Id.Equals(user.Id));
+            var dbUser = _users.FirstOrDefault(u => u.Id.Equals(id));
 
             if (dbUser != null)
             {
@@ -61,14 +61,15 @@ namespace WebApplication1.Controllers
             return NotFound();
         }
 
-        [HttpDelete]
-        public IActionResult DeleteUserById(Guid guid)
+        [HttpDelete(Name = nameof(DeleteUserById))]
+        public IActionResult DeleteUserById(Guid id)
         {
-            var user = _users.FirstOrDefault(u => u.Id.Equals(guid));
+            var user = _users.FirstOrDefault(u => u.Id.Equals(id));
 
             if (user != null)
             {
                 _users.Remove(user);
+                _logger.LogInformation($"Delete user with id '{user.Id}'");
                 return Ok(user);
             }
 
