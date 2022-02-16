@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
 
-        [HttpPost(Name = nameof(AddNewUser))]
+        [HttpPost]
         public IActionResult AddNewUser(User user)
         {
             user.Id = Guid.NewGuid();
@@ -33,38 +33,39 @@ namespace WebApplication1.Controllers
             return Created(user.Id.ToString(), user);
         }
 
-        [HttpGet(Name = nameof(GetAllUsers))]
+        [HttpGet]
         public IActionResult GetAllUsers()
         {
             return Ok(_users);
         }
 
-        [HttpGet(Name = nameof(GetUserById))]
+        [HttpGet("{guid:Guid}")]
         public IActionResult GetUserById(Guid guid)
         {
             var user = _users.FirstOrDefault(u => u.Id.Equals(guid));
-            return user != null ? Ok(user) : NotFound();
+            return user != null ? Ok(user) : NotFound($"NotFound by id: '{guid}'");
         }
 
-        [HttpPut(Name = nameof(UpdateUserById))]
-        public IActionResult UpdateUserById(Guid id, User user)
+        [HttpPut("{guid:Guid}")]
+        public IActionResult UpdateUserById(Guid guid, User user)
         {
-            var dbUser = _users.FirstOrDefault(u => u.Id.Equals(id));
+            var dbUser = _users.FirstOrDefault(u => u.Id == guid);
 
             if (dbUser != null)
             {
+                user.Id = guid;
                 var index = _users.IndexOf(dbUser);
                 _users[index] = user;
-                return Ok();
+                return Ok(user);
             }
 
-            return NotFound();
+            return NotFound($"NotFound by id: '{guid}'");
         }
 
-        [HttpDelete(Name = nameof(DeleteUserById))]
-        public IActionResult DeleteUserById(Guid id)
+        [HttpDelete("{guid:Guid}")]
+        public IActionResult DeleteUserById(Guid guid)
         {
-            var user = _users.FirstOrDefault(u => u.Id.Equals(id));
+            var user = _users.FirstOrDefault(u => u.Id == guid);
 
             if (user != null)
             {
@@ -73,7 +74,7 @@ namespace WebApplication1.Controllers
                 return Ok(user);
             }
 
-            return NotFound();
+            return NotFound($"NotFound by id: '{guid}'");
         }
     }
 }
