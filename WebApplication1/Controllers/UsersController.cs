@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewUser(User user)
+        public IActionResult AddUser(User user)
         {
             user.Id = Guid.NewGuid();
             _users.Add(user);
@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut("{guid:Guid}")]
-        public IActionResult UpdateUserById(Guid guid, User user)
+        public IActionResult UpdateUser(Guid guid, User user)
         {
             var dbUser = _users.FirstOrDefault(u => u.Id == guid);
 
