@@ -39,7 +39,6 @@ namespace MathLibrary.UnitTests
         public void GetMaxFromArray_WhenArrayEmptyOrNull_ShouldThrowArgumentException(int[] sourceArray, string expectedMessage)
         {
             Assert.Throws<ArgumentException>(() => MathHelper.GetMaxFromArray(sourceArray), expectedMessage);
-
         }
     }
 }
