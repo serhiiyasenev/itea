@@ -9,21 +9,21 @@ namespace MathLibrary
             return a > b ? (a > c ? a : c) : (b > c ? b : c);
         }
 
-        public static int GetMaxFromArray(int[] array)
+        public static int GetMaxFromArray(int[] sourceArray)
         {
-            if (array == null)
+            if (sourceArray == null)
             {
                 throw new ArgumentException("array should not be null");
             }
 
-            if (array.Length == 0)
+            if (sourceArray.Length == 0)
             {
-                throw new ArgumentException("array should not be empty");
+                throw new ArgumentException("array should not be emp");
             }
 
             var value = 0;
 
-            foreach (var x in array)
+            foreach (var x in sourceArray)
             {
                 if (x > value)
                 {

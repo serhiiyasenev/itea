@@ -5,11 +5,6 @@ namespace MathLibrary.UnitTests
 {
     public class MathHelperTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         // {MethodName}_{WhenCondition}_{ShouldExpectedResult}
         [Test]
         [TestCase(3, 2, 1 , 3)]
@@ -39,11 +34,12 @@ namespace MathLibrary.UnitTests
         }
 
         [Test]
-        [TestCase(null)]
-        [TestCase(new int[] { })]
-        public void GetMaxFromArray_WhenArrayEmptyOrNull_ShouldThrowArgumentException(int[] array)
+        [TestCase(null, "array should not be null")]
+        [TestCase(new int[] { }, "array should not be empty")]
+        public void GetMaxFromArray_WhenArrayEmptyOrNull_ShouldThrowArgumentException(int[] sourceArray, string expectedMessage)
         {
-            Assert.Throws<ArgumentException>(() => MathHelper.GetMaxFromArray(array));
+            Assert.Throws<ArgumentException>(() => MathHelper.GetMaxFromArray(sourceArray), expectedMessage);
+
         }
     }
 }
