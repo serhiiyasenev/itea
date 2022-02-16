@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CoreDAL
 {
-    public class UserRepository
+    public class UserListRepository : IUserRepository
     {
         private static List<UserDto> _users;
 

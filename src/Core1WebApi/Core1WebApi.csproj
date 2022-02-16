@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreBAL\CoreBL.csproj" />
+    <ProjectReference Include="..\CoreBL\CoreBL.csproj" />
     <ProjectReference Include="..\CoreDAL\CoreDAL.csproj" />
   </ItemGroup>
 

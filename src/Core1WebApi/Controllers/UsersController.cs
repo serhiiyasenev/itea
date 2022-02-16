@@ -1,5 +1,5 @@
-﻿using CoreBAL;
-using CoreBAL.Models;
+﻿using CoreBAL.Models;
+using CoreBL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

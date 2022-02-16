@@ -1,5 +1,5 @@
-using CoreBAL;
 using CoreBAL.Profiles;
+using CoreBL;
 using CoreDAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace WebApplication1
+namespace Core1WebApi
 {
     public class Startup
     {
@@ -24,7 +24,7 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
-            services.AddScoped<UserRepository>();
+            services.AddScoped<IUserRepository, UserListRepository>();
 
             var assemblies = new[]
             {
@@ -32,6 +32,7 @@ namespace WebApplication1
             };
 
             services.AddAutoMapper(assemblies);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

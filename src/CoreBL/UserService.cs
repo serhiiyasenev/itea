@@ -4,15 +4,15 @@ using CoreDAL;
 using CoreDAL.Entries;
 using System;
 
-namespace CoreBAL
+namespace CoreBL
 {
     public class UserService
     {
 
-        private UserRepository _userRepository;
+        private UserListRepository _userRepository;
         private IMapper _mapper;
 
-        public UserService(IMapper mapper, UserRepository userRepository)
+        public UserService(IMapper mapper, UserListRepository userRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
