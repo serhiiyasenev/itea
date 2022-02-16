@@ -7,6 +7,7 @@ namespace WebApplication1.Models
     public class User
     {
         private DateTime _birthDate;
+        
         public Guid Id { get; set; }
 
         [Required]
