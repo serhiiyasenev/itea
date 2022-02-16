@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
             return Created(user.Id.ToString(), user);
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public IActionResult GetAllUsers()
         {
             return Ok(_users);
@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpDelete("{guid:Guid}")]
-        public IActionResult DeleteUserById(Guid guid)
+        public IActionResult DeleteUser(Guid guid)
         {
             var user = _users.FirstOrDefault(u => u.Id == guid);
 
