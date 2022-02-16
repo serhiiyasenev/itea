@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
-namespace WebApplication1.Models
+namespace CoreBAL.Models
 {
     public class User
     {
