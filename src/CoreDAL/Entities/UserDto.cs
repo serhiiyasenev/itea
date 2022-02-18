@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoreDAL.Entries
+namespace CoreDAL.Entities
 {
     public class UserDto
     {

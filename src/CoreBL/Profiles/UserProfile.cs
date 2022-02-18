@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CoreBAL.Models;
-using CoreDAL.Entries;
+using CoreDAL.Entities;
 
 namespace CoreBAL.Profiles
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CoreBAL.Models;
 using CoreDAL;
-using CoreDAL.Entries;
+using CoreDAL.Entities;
 using System;
 
 namespace CoreBL
