@@ -40,6 +40,7 @@ namespace CoreDAL
             if (dbUser != null)
             {
                 user.Id = id;
+                // why it updates without id?
                 var update = _dbContext.Users.Update(user);
                 await _dbContext.SaveChangesAsync();
                 return update.Entity;
