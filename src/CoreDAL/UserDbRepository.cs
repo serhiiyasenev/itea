@@ -1,7 +1,8 @@
 ﻿using CoreDAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoreDAL
 {
@@ -14,47 +15,52 @@ namespace CoreDAL
             _dbContext = dbContext;
         }
 
-        public void Add(UserDto user)
+        public async Task<UserDto> Add(UserDto user)
         {
-            _dbContext.Add(user);
+            user.Id = Guid.NewGuid();
+            var userEntity = await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+            return userEntity.Entity;
         }
 
-        public IEnumerable<UserDto> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return _dbContext.Users;
+            return await _dbContext.Users.AsNoTracking().ToListAsync();
         }
 
-        public UserDto GetUserById(Guid id)
+        public async Task<UserDto> GetById(Guid id)
         {
-            return _dbContext.Users.FirstOrDefault(u => u.Id == id);
+            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public UserDto RemoveUserById(Guid id)
+        public async Task<UserDto> UpdateById(Guid id, UserDto user)
         {
-            var dbUser = GetUserById(id);
+            var dbUser = await GetById(id);
 
             if (dbUser != null)
             {
-                var index = _dbContext.Users.ToList().IndexOf(dbUser);
-                _dbContext.Remove(index);
-                return dbUser;
+                user.Id = id;
+                var update = _dbContext.Users.Update(user);
+                await _dbContext.SaveChangesAsync();
+                return update.Entity;
             }
 
             return null;
         }
 
-        public UserDto UpdateUserById(UserDto user)
+        public async Task<Guid?> RemoveById(Guid id)
         {
-            var dbUser = GetUserById(user.Id);
-
+            var dbUser = await GetById(id);
+            // do we need to check null here?
             if (dbUser != null)
             {
-                var index = _dbContext.Users.ToList().IndexOf(dbUser);
-                _dbContext.Users.ToList()[index] = user;
-                return dbUser;
+                var userEntity = _dbContext.Users.Remove(dbUser);
+                await _dbContext.SaveChangesAsync();
+                return userEntity.Entity.Id;
             }
 
             return null;
         }
+
     }
 }

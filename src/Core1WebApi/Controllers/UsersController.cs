@@ -1,9 +1,11 @@
-﻿using CoreBAL.Models;
-using CoreBL;
+﻿using CoreBL;
+using CoreBL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
-namespace WebApplication1.Controllers
+namespace Core1WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -19,60 +21,56 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUser(User user)
+        public async Task<IActionResult> AddUser(User user)
         {
             if (user != null)
             {
-                var createdGuid = _userService.AddUser(user);
-                return Created(createdGuid.ToString(), user);
+                var createdUser = await _userService.AddUser(user);
+                _logger.LogInformation($"User was created with id: '{createdUser.Id}'");
+                return Created(createdUser.Id.ToString(), createdUser);
             }
 
             return BadRequest();
 
         }
 
-        [HttpGet("all")]
-        public IActionResult GetAllUsers()
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
         {
-            return Ok(_userService);
+            return Ok(await _userService.GetAllUsers());
         }
 
-        //[HttpGet("{guid:Guid}")]
-        //public IActionResult GetUserById(Guid guid)
-        //{
-        //    var user = _users.FirstOrDefault(u => u.Id.Equals(guid));
-        //    return user != null ? Ok(user) : NotFound($"NotFound by id: '{guid}'");
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(Guid id)
+        {
+            var user = await _userService.GetUserById(id);
+            return user != null ? Ok(user) : NotFound($"NotFound by id: '{id}'");
+        }
 
-        //[HttpPut("{guid:Guid}")]
-        //public IActionResult UpdateUser(Guid guid, User user)
-        //{
-        //    var dbUser = _userService.FirstOrDefault(u => u.Id == guid);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUserById(Guid id, User user)
+        {
+            var updatedUser = await _userService.UpdateUserById(id, user);
 
-        //    if (dbUser != null)
-        //    {
-        //        user.Id = guid;
-        //        var index = _users.IndexOf(dbUser);
-        //        _users[index] = user;
-        //        return Ok(user);
-        //    }
+            if (updatedUser != null)
+            {
+                return Ok(updatedUser);
+            }
 
-        //    return NotFound($"NotFound by id: '{guid}'");
-        //}
+            return NotFound($"NotFound by id: '{id}'");
+        }
 
-        //[HttpDelete("{guid:Guid}")]
-        //public IActionResult DeleteUser(Guid guid)
-        //{
-        //    var user = _userService.FirstOrDefault(u => u.Id == guid);
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            var guid = await _userService.RemoveUserById(id);
 
-        //    if (user != null)
-        //    {
-        //        _users.Remove(user);
-        //        _logger.LogInformation($"Delete user with id '{user.Id}'");
-        //        return Ok(user);
-        //    }
+            if (guid != null)
+            {
+                return Ok(guid);
+            }
 
-        //    return NotFound($"NotFound by id: '{guid}'");
-        //}
+            return NotFound($"NotFound by id: '{id}'");
+        }
     }
 }

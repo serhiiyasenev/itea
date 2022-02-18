@@ -1,8 +1,9 @@
-using CoreBAL.Profiles;
 using CoreBL;
+using CoreBL.Profiles;
 using CoreDAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,13 +25,12 @@ namespace Core1WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
-            services.AddScoped<IUserRepository, UserListRepository>();
+            services.AddScoped<IUserRepository, UserDbRepository>();
 
-            var assemblies = new[]
-            {
-                Assembly.GetAssembly(typeof(UserProfile))
-            };
+            services.AddDbContext<EfCoreContext>(options
+                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            var assemblies = new[] { Assembly.GetAssembly(typeof(UserProfile)) };
             services.AddAutoMapper(assemblies);
 
             services.AddControllers();

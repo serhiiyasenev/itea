@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoreBAL.Models;
+using CoreBL.Models;
 using CoreDAL.Entities;
 
-namespace CoreBAL.Profiles
+namespace CoreBL.Profiles
 {
     public class UserProfile : Profile
     {
@@ -18,7 +18,7 @@ namespace CoreBAL.Profiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
-                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate.ToString("MM/dd/yyyy")));
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate));
         }
 
     }

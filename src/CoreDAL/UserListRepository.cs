@@ -2,54 +2,62 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoreDAL
 {
     public class UserListRepository : IUserRepository
     {
-        private static List<UserDto> _users;
+        static readonly List<UserDto> Users;
 
-        public void Add(UserDto user)
+        static UserListRepository()
         {
-            _users.Add(user);
+            Users = new List<UserDto>();
         }
 
-        public IEnumerable<UserDto> GetAll()
+        public async Task<UserDto> Add(UserDto user)
         {
-            return _users;
+            user.Id = Guid.NewGuid();
+            Users.Add(user);
+            return await Task.FromResult(user);
         }
 
-        public UserDto GetUserById(Guid id)
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return _users.FirstOrDefault(u => u.Id == id);
+            return await Task.FromResult(Users);
         }
 
-        public UserDto RemoveUserById(Guid id)
+        public async Task<UserDto> GetById(Guid id)
         {
-            var dbUser = _users.FirstOrDefault(u => u.Id == id);
+            return await Task.FromResult(Users.FirstOrDefault(x => x.Id == id));
+        }
 
-            if (dbUser != null)
+        public async Task<UserDto> UpdateById(Guid id, UserDto user)
+        {
+            var listUser = await GetById(id);
+
+            if (listUser != null)
             {
-                var index = _users.IndexOf(dbUser);
-                _users.RemoveAt(index);
-                return dbUser;
+                user.Id = id;
+                var index = Users.IndexOf(listUser);
+                Users[index] = user;
+                return await Task.FromResult(Users[index]);
             }
 
-            return null;
+            return await Task.FromResult((UserDto)null);
         }
 
-        public UserDto UpdateUserById(UserDto user)
+        public async Task<Guid?> RemoveById(Guid id)
         {
-            var dbUser = GetUserById(user.Id);
+            var user = await GetById(id);
 
-            if (dbUser != null)
+            if (user != null)
             {
-                var index = _users.IndexOf(dbUser);
-                _users[index] = user;
-                return dbUser;
+                Users.Remove(user);
+                return await Task.FromResult(user.Id);
             }
 
-            return null;
+            return await Task.FromResult((Guid?)null);
         }
     }
 }
