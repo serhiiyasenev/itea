@@ -47,17 +47,17 @@ namespace CoreDAL
             return await Task.FromResult((UserDto)null);
         }
 
-        public async Task<Guid?> RemoveById(Guid id)
+        public async Task<int> RemoveById(Guid id)
         {
             var user = await GetById(id);
 
             if (user != null)
             {
                 Users.Remove(user);
-                return await Task.FromResult(user.Id);
+                return await Task.FromResult(0);
             }
 
-            return await Task.FromResult((Guid?)null);
+            return await Task.FromResult(1);
         }
     }
 }

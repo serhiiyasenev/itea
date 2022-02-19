@@ -15,6 +15,6 @@ namespace CoreDAL
 
         Task<UserDto> UpdateById(Guid id, UserDto user);
 
-        Task<Guid?> RemoveById(Guid id);
+        Task<int> RemoveById(Guid id);
     }
 }

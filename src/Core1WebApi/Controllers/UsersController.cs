@@ -62,11 +62,11 @@ namespace Core1WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var guid = await _userService.RemoveUserById(id);
+            var result = await _userService.RemoveUserById(id);
 
-            if (guid != null)
+            if (result > 0)
             {
-                return Ok(guid);
+                return Ok(id);
             }
 
             return NotFound($"NotFound by id: '{id}'");
