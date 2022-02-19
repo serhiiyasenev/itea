@@ -31,7 +31,6 @@ namespace Core1WebApi.Controllers
             }
 
             return BadRequest();
-
         }
 
         [HttpGet]

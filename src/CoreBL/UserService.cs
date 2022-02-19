@@ -25,6 +25,7 @@ namespace CoreBL
             {
                 throw new ArgumentException("First and Last name should start with capital letter!");
             }
+
             var createdUser = await _userRepository.Add(_mapper.Map<UserDto>(user));
             return _mapper.Map<User>(createdUser);
         }

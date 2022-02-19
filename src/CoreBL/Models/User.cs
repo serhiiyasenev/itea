@@ -24,6 +24,7 @@ namespace CoreBL.Models
         public DateTime BirthDate
         {
             get => _birthDate;
+            // try parse
             set => _birthDate = DateTime.Parse(value.ToString(CultureInfo.InvariantCulture));
         }
     }
