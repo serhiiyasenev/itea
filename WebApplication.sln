@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreBL", "src\CoreBL\CoreBL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core1WebApi", "src\Core1WebApi\Core1WebApi.csproj", "{BFA17530-57AA-49BA-B3CF-677213DF8EC5}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CoreDB", "CoreDB\CoreDB.sqlproj", "{940FE0EB-761F-4DFF-843F-59DFE016EE1D}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CoreDB", "src\CoreDB\CoreDB.sqlproj", "{940FE0EB-761F-4DFF-843F-59DFE016EE1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
