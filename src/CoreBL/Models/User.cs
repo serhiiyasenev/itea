@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
-namespace WebApplication1.Models
+namespace CoreBL.Models
 {
     public class User
     {
@@ -24,6 +24,7 @@ namespace WebApplication1.Models
         public DateTime BirthDate
         {
             get => _birthDate;
+            // try parse
             set => _birthDate = DateTime.Parse(value.ToString(CultureInfo.InvariantCulture));
         }
     }
