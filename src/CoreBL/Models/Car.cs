@@ -5,21 +5,21 @@ using System.Globalization;
 
 namespace CoreBL.Models
 {
-    public class User
+    public class Car
     {
         private DateTime _birthDate;
         
         public Guid Id { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(20)]
-        public string FirstName { get; set; }
+        [MinLength(5)]
+        [MaxLength(12)]
+        public string RegistrationPlate { get; set; }
 
         [Required]
         [MinLength(2)]
-        [MaxLength(20)]
-        public string LastName { get; set; }
+        [MaxLength(25)]
+        public string Brand { get; set; }
 
         [Required]
         public DateTime BirthDate
@@ -28,6 +28,6 @@ namespace CoreBL.Models
             set => _birthDate = DateTime.Parse(value.ToString(CultureInfo.InvariantCulture));
         }
 
-        List<Car> Cars { get; set; }
+        List<User> Users { get; set; }
     }
 }

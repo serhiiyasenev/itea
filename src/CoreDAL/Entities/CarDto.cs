@@ -5,22 +5,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoreDAL.Entities
 {
-    [Table("Users")]
-    public class UserDto
+    public class CarDto
     {
         [Key, Column("Id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Column("FirstName")]
-        public string FirstName { get; set; }
+        [Column("RegistrationPlate")]
+        public string RegistrationPlate { get; set; }
 
-        [Column("LastName")]
-        public string LastName { get; set; }
+        [Column("Brand")]
+        public string Brand { get; set; }
 
-        [Column("BirthDate")]
-        public DateTime BirthDate { get; set; }
+        [Column("ReleaseYear")]
+        public int ReleaseYear { get; set; }
 
-        public List<CarDto> Cars { get; set; }
+        public List<UserDto> Users { get; set; }
     }
 }
