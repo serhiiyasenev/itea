@@ -54,10 +54,10 @@ namespace CoreDAL
             if (user != null)
             {
                 Users.Remove(user);
-                return await Task.FromResult(0);
+                return await Task.FromResult(1);
             }
 
-            return await Task.FromResult(1);
+            return await Task.FromResult(0);
         }
     }
 }
