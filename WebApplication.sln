@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{685638B2-4AFE-4118-9414-395A7E0ED5B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{9FE8235E-C556-4621-A839-E2F98FA45BAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathLibrary", "ClassLibrary1\MathLibrary.csproj", "{9FE8235E-C556-4621-A839-E2F98FA45BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathLibrary.UnitTests", "MathLibrary.UnitTests\MathLibrary.UnitTests.csproj", "{B5F6201D-4A4C-47A4-860E-F14722328E43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9FE8235E-C556-4621-A839-E2F98FA45BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE8235E-C556-4621-A839-E2F98FA45BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE8235E-C556-4621-A839-E2F98FA45BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F6201D-4A4C-47A4-860E-F14722328E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F6201D-4A4C-47A4-860E-F14722328E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F6201D-4A4C-47A4-860E-F14722328E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F6201D-4A4C-47A4-860E-F14722328E43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
