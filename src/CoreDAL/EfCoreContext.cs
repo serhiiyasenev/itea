@@ -26,6 +26,9 @@ namespace CoreDAL
 
             modelBuilder.Entity<UserDto>().HasKey(user => user.Id);
             modelBuilder.Entity<CarDto>().HasKey(car => car.Id);
+
+            modelBuilder.Entity<UserDto>().HasMany(u => u.Cars).WithMany(c => c.Users);
+            modelBuilder.Entity<CarDto>().HasMany(c => c.Users).WithMany(u => u.Cars);
         }
 
     }
