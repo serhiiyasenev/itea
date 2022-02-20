@@ -1,6 +1,6 @@
 ﻿using CoreDAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 
 namespace CoreDAL
@@ -16,7 +16,7 @@ namespace CoreDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+            optionsBuilder.LogTo(Console.WriteLine, new[] { RelationalEventId.CommandExecuted });
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
