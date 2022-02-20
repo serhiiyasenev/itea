@@ -17,8 +17,8 @@ namespace CoreDAL.Entities
         [Column("Brand")]
         public string Brand { get; set; }
 
-        [Column("ReleaseYear")]
-        public int ReleaseYear { get; set; }
+        [Column("ReleaseDate")]
+        public int ReleaseDate { get; set; }
 
         public List<UserDto> Users { get; set; }
     }

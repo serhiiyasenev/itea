@@ -7,7 +7,7 @@ namespace CoreBL.Models
 {
     public class Car
     {
-        private DateTime _birthDate;
+        private DateTime _releaseDate;
         
         public Guid Id { get; set; }
 
@@ -22,10 +22,17 @@ namespace CoreBL.Models
         public string Brand { get; set; }
 
         [Required]
-        public DateTime BirthDate
+        public DateTime ReleaseDate
         {
-            get => _birthDate;
-            set => _birthDate = DateTime.Parse(value.ToString(CultureInfo.InvariantCulture));
+            get => _releaseDate;
+            set
+            {
+                if (!DateTime.TryParse(value.ToString(CultureInfo.InvariantCulture), out _releaseDate))
+                {
+                    throw new ArgumentException($"Cannot parse ReleaseDate from '{value}'");
+                }
+                
+            }
         }
 
         List<User> Users { get; set; }

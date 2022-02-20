@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoreDAL
@@ -31,30 +30,38 @@ namespace CoreDAL
 
         public async Task<UserDto> GetById(Guid id)
         {
-            return await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return await _dbContext.Users.FindAsync(id);
         }
 
         public async Task<UserDto> UpdateById(Guid id, UserDto user)
         {
-            var updated = await _dbContext.Users.Where(u => u.Id == id)
-                .UpdateFromQueryAsync(u => new UserDto {FirstName = user.FirstName, LastName = user.LastName, BirthDate = user.BirthDate});
-            if (updated > 0)
+            user.Id = id;
+            _dbContext.Attach(user);
+            _dbContext.Entry(user).State = EntityState.Modified;
+            try
             {
-                user.Id = id;
                 await _dbContext.SaveChangesAsync();
-                return user;
             }
-            return null;
+            catch (DbUpdateException)
+            {
+                return null;
+            }
+            return user;
         }
 
         public async Task<int> RemoveById(Guid id)
         {
-            var result = await _dbContext.Users.Where(u => u.Id == id).DeleteFromQueryAsync();
-            if (result > 0)
+            var user = new UserDto { Id = id };
+            _dbContext.Attach(user);
+            _dbContext.Entry(user).State = EntityState.Deleted;
+            try
             {
-                await _dbContext.SaveChangesAsync();
+                return await _dbContext.SaveChangesAsync();
             }
-            return result;
+            catch (DbUpdateException)
+            {
+                return 0;
+            }
         }
     }
 }
