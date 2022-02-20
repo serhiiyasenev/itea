@@ -24,7 +24,7 @@ namespace CoreDAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserDto>().HasKey(user => user.Id);
-            modelBuilder.Entity<CarDto>().HasKey(user => user.Id);
+            modelBuilder.Entity<CarDto>().HasKey(car => car.Id);
         }
 
     }
