@@ -25,7 +25,13 @@ namespace CoreBL.Models
         public DateTime BirthDate
         {
             get => _birthDate;
-            set => _birthDate = DateTime.Parse(value.ToString(CultureInfo.InvariantCulture));
+            set
+            {
+                if (!DateTime.TryParse(value.ToString(CultureInfo.InvariantCulture), out _birthDate))
+                {
+                    throw new ArgumentException($"Cannot parse BirthDate from '{value}'");
+                }
+            }
         }
 
         List<Car> Cars { get; set; }

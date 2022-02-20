@@ -31,7 +31,6 @@ namespace CoreBL.Models
                 {
                     throw new ArgumentException($"Cannot parse ReleaseDate from '{value}'");
                 }
-                
             }
         }
 
