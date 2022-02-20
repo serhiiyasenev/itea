@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoreDAL.Entities
 {
+    [Table("Cars")]
     public class CarDto
     {
         [Key, Column("Id")]
