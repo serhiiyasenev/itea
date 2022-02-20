@@ -1,5 +1,7 @@
 ﻿using CoreDAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace CoreDAL
 {
@@ -14,7 +16,7 @@ namespace CoreDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,6 +24,7 @@ namespace CoreDAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserDto>().HasKey(user => user.Id);
+            modelBuilder.Entity<CarDto>().HasKey(user => user.Id);
         }
 
     }
