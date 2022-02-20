@@ -8,6 +8,7 @@ namespace CoreDAL
     public class EfCoreContext : DbContext
     {
         public DbSet<UserDto> Users { get; set; }
+        public DbSet<CarDto> Cars { get; set; }
 
         public EfCoreContext(DbContextOptions<EfCoreContext> options) : base(options)
         {
