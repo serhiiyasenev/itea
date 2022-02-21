@@ -34,6 +34,6 @@ namespace CoreBL.Models
             }
         }
 
-        List<Car> Cars { get; set; }
+        public List<Car> Cars { get; set; }
     }
 }
