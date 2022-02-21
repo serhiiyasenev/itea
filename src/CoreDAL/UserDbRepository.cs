@@ -25,43 +25,43 @@ namespace CoreDAL
 
         public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return await _dbContext.Users.AsNoTracking().ToListAsync();
+            return await _dbContext.Users.ToListAsync();
         }
 
         public async Task<UserDto> GetById(Guid id)
         {
-            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+            return await _dbContext.Users.FindAsync(id);
         }
 
         public async Task<UserDto> UpdateById(Guid id, UserDto user)
         {
-            var dbUser = await GetById(id);
-
-            if (dbUser != null)
+            user.Id = id;
+            _dbContext.Attach(user);
+            _dbContext.Entry(user).State = EntityState.Modified;
+            try
             {
-                user.Id = id;
-                // why it updates without id?
-                var update = _dbContext.Users.Update(user);
                 await _dbContext.SaveChangesAsync();
-                return update.Entity;
             }
-
-            return null;
+            catch (DbUpdateException)
+            {
+                return null;
+            }
+            return user;
         }
 
-        public async Task<Guid?> RemoveById(Guid id)
+        public async Task<int> RemoveById(Guid id)
         {
-            var dbUser = await GetById(id);
-            // do we need to check null here?
-            if (dbUser != null)
+            var user = new UserDto { Id = id };
+            _dbContext.Attach(user);
+            _dbContext.Entry(user).State = EntityState.Deleted;
+            try
             {
-                var userEntity = _dbContext.Users.Remove(dbUser);
-                await _dbContext.SaveChangesAsync();
-                return userEntity.Entity.Id;
+                return await _dbContext.SaveChangesAsync();
             }
-
-            return null;
+            catch (DbUpdateException)
+            {
+                return 0;
+            }
         }
-
     }
 }

@@ -48,7 +48,7 @@ namespace CoreBL
             return _mapper.Map<User>(dbUser);
         }
 
-        public async Task<Guid?> RemoveUserById(Guid id)
+        public async Task<int> RemoveUserById(Guid id)
         {
             return await _userRepository.RemoveById(id);
         }
