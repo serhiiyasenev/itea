@@ -11,9 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    projects: |
-      !**/*CoreDB*
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -24,5 +21,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+      with:
+        projectPath: *.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal
