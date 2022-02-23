@@ -1,5 +1,6 @@
 ﻿using CoreBL;
 using CoreBL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -89,6 +90,7 @@ namespace Core1WebApi.Controllers
         /// <remarks>
         /// The endpoint returns pointed Guid
         /// </remarks>
+        [Authorize (Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {

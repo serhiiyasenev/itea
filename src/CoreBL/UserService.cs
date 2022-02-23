@@ -12,11 +12,13 @@ namespace CoreBL
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private IAuthRepository _authRepository;
 
-        public UserService(IMapper mapper, IUserRepository userRepository)
+        public UserService(IMapper mapper, IUserRepository userRepository, IAuthRepository authRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            __authRepository = authRepository;
         }
 
         public async Task<User> AddUser(User user)
@@ -51,6 +53,25 @@ namespace CoreBL
         public async Task<int> RemoveUserById(Guid id)
         {
             return await _userRepository.RemoveById(id);
+        }
+
+        public async Task<bool> LoginAsync(Credentials credentials)
+        {
+            credentials.Password = HashPassword(credentials.Password);
+
+            var success = await _authRepository.LoginAsync(credentials);
+            string token = string.Empty;
+
+            if (success)
+            {
+                // generate token
+            }
+
+        }
+
+        private string HashPassword(string password)
+        {
+            return password;
         }
     }
 }

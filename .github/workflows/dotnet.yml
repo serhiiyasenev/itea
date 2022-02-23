@@ -10,9 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
-    projects: |
-      !**/*CoreDB*
 
     steps:
     - uses: actions/checkout@v2

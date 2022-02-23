@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CoreDAL
 {
-    public class UserDbRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly EfCoreContext _dbContext;
 
-        public UserDbRepository(EfCoreContext dbContext)
+        public UserRepository(EfCoreContext dbContext)
         {
             _dbContext = dbContext;
         }

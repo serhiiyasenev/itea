@@ -1,4 +1,5 @@
 using CoreBL;
+using CoreBL.Models;
 using CoreBL.Profiles;
 using CoreDAL;
 using Microsoft.AspNetCore.Builder;
@@ -25,10 +26,15 @@ namespace Core1WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
-            services.AddScoped<IUserRepository, UserDbRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddDbContext<EfCoreContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.Configure<AuthOptions>(Configuration.GetSection(nameof(AuthOptions)));
+
+            // add JWT Bearer
 
             var assemblies = new[] { Assembly.GetAssembly(typeof(UserProfile)) };
             services.AddAutoMapper(assemblies);
@@ -55,6 +61,8 @@ namespace Core1WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

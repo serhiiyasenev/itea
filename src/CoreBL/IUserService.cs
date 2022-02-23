@@ -16,5 +16,7 @@ namespace CoreBL
         Task<User> UpdateUserById(Guid id, User user);
 
         Task<int> RemoveUserById(Guid id);
+
+        Task<bool> Login(Credentials credentials);
     }
 }

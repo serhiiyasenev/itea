@@ -19,5 +19,11 @@ namespace CoreDAL.Entities
 
         [Column("BirthDate")]
         public DateTime BirthDate { get; set; }
+
+        [Column("Login")]
+        public string Login { get; set; }
+
+        [Column("Password")]
+        public string Password { get; set; }
     }
 }
