@@ -12,12 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    projects: '**/*.csproj'
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    - name: Exclude SQL project
+      run: dotnet sln remove src/CoreDB/CoreDB.sqlproj 
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
