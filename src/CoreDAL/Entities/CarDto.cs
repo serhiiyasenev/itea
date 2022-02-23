@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,7 +19,5 @@ namespace CoreDAL.Entities
 
         [Column("ReleaseDate")]
         public int ReleaseDate { get; set; }
-
-        public List<UserDto> Users { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace CoreDAL
     {
         public DbSet<UserDto> Users { get; set; }
         public DbSet<CarDto> Cars { get; set; }
+        public DbSet<UsersCarDto> UsersCars { get; set; }
+
 
         public EfCoreContext(DbContextOptions<EfCoreContext> options) : base(options)
         {
@@ -26,9 +28,7 @@ namespace CoreDAL
 
             modelBuilder.Entity<UserDto>().HasKey(user => user.Id);
             modelBuilder.Entity<CarDto>().HasKey(car => car.Id);
-
-            modelBuilder.Entity<UserDto>().HasMany(u => u.Cars).WithMany(c => c.Users);
-            modelBuilder.Entity<CarDto>().HasMany(c => c.Users).WithMany(u => u.Cars);
+            modelBuilder.Entity<UsersCarDto>().HasKey(e => new {e.UserId, e.CarId});
         }
 
     }

@@ -10,9 +10,9 @@ namespace CoreBL.Profiles
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+
             CreateMap<Car, CarDto>();
             CreateMap<CarDto, Car>();
         }
-
     }
 }
