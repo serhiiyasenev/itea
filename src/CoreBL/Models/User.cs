@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
@@ -34,6 +33,6 @@ namespace CoreBL.Models
             }
         }
 
-        public List<Car> Cars { get; set; }
+        public Car Car { get; set; }
     }
 }

@@ -25,7 +25,8 @@ namespace CoreDAL
 
         public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return await _dbContext.Users.ToListAsync();
+            var result = await _dbContext.Users.Include(u => u.Car).ToListAsync();
+            return result;
         }
 
         public async Task<UserDto> GetById(Guid id)
