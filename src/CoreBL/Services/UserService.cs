@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CoreBL.Interfaces;
 using CoreBL.Models;
 using CoreDAL.Entities;
 using CoreDAL.Interfaces;
@@ -6,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CoreBL
+namespace CoreBL.Services
 {
     public class UserService : IUserService
     {

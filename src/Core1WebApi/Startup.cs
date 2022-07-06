@@ -1,5 +1,5 @@
-using CoreBL;
 using CoreBL.Profiles;
+using CoreBL.Services;
 using CoreDAL;
 using CoreDAL.Interfaces;
 using CoreDAL.Repositories;
