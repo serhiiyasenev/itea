@@ -1,3 +1,4 @@
+using CoreBL.Interfaces;
 using CoreBL.Profiles;
 using CoreBL.Services;
 using CoreDAL;
@@ -26,8 +27,9 @@ namespace Core1WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<UserService>();
             services.AddScoped<IUserRepository, UserDbRepository>();
+
+            services.AddScoped<IUserService, UserService>();
 
             services.AddDbContext<EfCoreContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

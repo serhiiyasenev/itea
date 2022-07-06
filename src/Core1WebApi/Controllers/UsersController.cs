@@ -1,5 +1,5 @@
-﻿using CoreBL.Models;
-using CoreBL.Services;
+﻿using CoreBL.Interfaces;
+using CoreBL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,9 +12,9 @@ namespace Core1WebApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UsersController(ILogger<UsersController> logger, UserService userService)
+        public UsersController(ILogger<UsersController> logger, IUserService userService)
         {
             _logger = logger;
             _userService = userService;
