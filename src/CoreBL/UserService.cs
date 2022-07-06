@@ -69,7 +69,6 @@ namespace CoreBL
             return auth;
         }
 
-
         private string HashPassword(string password)
         {
             return password;
