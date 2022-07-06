@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CoreBL.Models;
-using CoreDAL;
 using CoreDAL.Entities;
+using CoreDAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

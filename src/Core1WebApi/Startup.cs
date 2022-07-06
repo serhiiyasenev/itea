@@ -1,6 +1,8 @@
 using CoreBL;
 using CoreBL.Profiles;
 using CoreDAL;
+using CoreDAL.Interfaces;
+using CoreDAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

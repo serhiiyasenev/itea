@@ -1,10 +1,11 @@
 ﻿using CoreDAL.Entities;
+using CoreDAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CoreDAL
+namespace CoreDAL.Repositories
 {
     public class UserDbRepository : IUserRepository
     {
