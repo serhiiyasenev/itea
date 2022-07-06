@@ -5,6 +5,7 @@ using CoreDAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Credentials = CoreBL.Models.Credentials;
 
 namespace CoreBL
 {
@@ -18,7 +19,7 @@ namespace CoreBL
         {
             _mapper = mapper;
             _userRepository = userRepository;
-            __authRepository = authRepository;
+            _authRepository = authRepository;
         }
 
         public async Task<User> AddUser(User user)
@@ -55,19 +56,19 @@ namespace CoreBL
             return await _userRepository.RemoveById(id);
         }
 
-        public async Task<bool> LoginAsync(Credentials credentials)
+        public async Task<(bool status, string result)> Login(Credentials credentials)
         {
-            credentials.Password = HashPassword(credentials.Password);
-
-            var success = await _authRepository.LoginAsync(credentials);
-            string token = string.Empty;
-
-            if (success)
+            var creds = new CoreDAL.Entities.Credentials
             {
-                // generate token
-            }
+                Login = credentials.Login,
+                Password = HashPassword(credentials.Password)
+            };
 
+            var auth = await _authRepository.CreateAuthToken(creds);
+
+            return auth;
         }
+
 
         private string HashPassword(string password)
         {
