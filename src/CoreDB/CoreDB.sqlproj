@@ -57,11 +57,15 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="PostDeployment" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Cars.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment\PrefillData.sql" />
   </ItemGroup>
 </Project>
