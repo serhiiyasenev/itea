@@ -12,6 +12,6 @@ namespace CoreBL.Models
         [MaxLength(12)]
         public string RegistrationPlate { get; set; }
 
-        public Guid UserId { get; set; }
+        //public Guid UserId { get; set; }
     }
 }
