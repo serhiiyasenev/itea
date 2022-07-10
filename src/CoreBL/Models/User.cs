@@ -28,7 +28,7 @@ namespace CoreBL.Models
             {
                 if (!DateTime.TryParse(value.ToString(CultureInfo.InvariantCulture), out _birthDate))
                 {
-                    throw new ArgumentException($"Cannot parse BirthDate from '{value}'");
+                    throw new ArgumentException($"Cannot parse BirthDate from `{value}`");
                 }
             }
         }

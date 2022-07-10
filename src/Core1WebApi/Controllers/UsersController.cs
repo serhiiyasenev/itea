@@ -55,7 +55,7 @@ namespace Core1WebApi.Controllers
         /// Get user by id endpoint
         /// </summary>
         /// <remarks>
-        /// The endpoint returns pointed user from a storage
+        /// The endpoint returns pointed by it's Guid user from a storage
         /// </remarks>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
@@ -68,7 +68,7 @@ namespace Core1WebApi.Controllers
         /// Update user by id endpoint
         /// </summary>
         /// <remarks>
-        /// The endpoint returns newly updated user
+        /// The endpoint returns newly updated user by Guid
         /// </remarks>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUserById(Guid id, User user)
