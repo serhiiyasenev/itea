@@ -35,7 +35,7 @@ namespace Core1WebApi
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             var assemblies = new[] { Assembly.GetAssembly(typeof(UserProfile)) };
-            services.AddAutoMapper(assemblies);
+            services.AddAutoMapper(_ => { }, typeof(UserProfile));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
